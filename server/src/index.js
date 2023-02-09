@@ -1,30 +1,49 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
+const { MongoClient } = require('mongodb');
 
-const app = express();
+//const { v4: uuidv4 } = require('uuid');
 
-app.use(express.json());
+const DB_URL = 'mongodb://127.0.0.1:27017';
+const DB_NAME = 'ocean-jornadaFullstack-09-02-2023';
 
-const itens = ['Rick Sanchez', 'Morty Smith', 'Summer Smith'];
+// anonymous function
+// (async () => {})()
 
-app.get('/itens', (req, res) => {
-  res.send(itens);
-});
+async function main() {
+  // Database connection.
+  console.log('Connecting with the database...');
+  const client = await MongoClient.connect(DB_URL);
+  const db = client.db(DB_NAME);
+  const collection = db.collection('itens');
+  console.log('Connected database!');
 
-app.get('/itens/:id', (req, res) => {
-  const id = req.params.id;
-  const item = itens[id - 1];
-  res.status(20).json(item);
-});
+  const app = express();
 
-app.post('/create', (req, res) => {
-  const { name } = req.body;
+  app.use(express.json());
 
-  itens.push({
-    id: uuidv4(),
-    name,
+  //const itens = ['Rick Sanchez', 'Morty Smith', 'Summer Smith'];
+
+  app.get('/itens', async (req, res) => {
+    const documents = await collection.find().toArray();
+    res.send(documents);
   });
-  return res.status(201).send();
-});
 
-app.listen(3000, () => console.log('listening on port 3000'));
+  app.get('/itens/:id', (req, res) => {
+    const id = req.params.id;
+    const item = itens[id - 1];
+    res.send(item);
+  });
+
+  app.post('/create', (req, res) => {
+    const { name } = req.body;
+
+    itens.push({
+      name,
+    });
+    return res.status(201).send();
+  });
+
+  app.listen(3000, () => console.log('Listening on port 3000'));
+}
+
+main();
