@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 
 //const { v4: uuidv4 } = require('uuid');
 
-const DB_URL = 'mongodb://127.0.0.1:27017';
-const DB_NAME = 'ocean-jornadaFullstack-09-02-2023';
+const DB_URL = process.env.DB_CONNECTION;
+const DB_NAME = process.env.DB_CLUSTER;
 
 // anonymous function
 // (async () => {})()
@@ -22,8 +23,6 @@ async function main() {
   app.use(express.json());
 
   app.listen(3000, () => console.log('Listening on port 3000'));
-
-  const itens = ['Rick Sanchez', 'Morty Smith', 'Summer Smith'];
 
   app.post('/create', async (req, res) => {
     const item = req.body;
