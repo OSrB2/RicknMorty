@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 //const { v4: uuidv4 } = require('uuid');
 
@@ -21,29 +21,47 @@ async function main() {
 
   app.use(express.json());
 
-  //const itens = ['Rick Sanchez', 'Morty Smith', 'Summer Smith'];
+  app.listen(3000, () => console.log('Listening on port 3000'));
+
+  const itens = ['Rick Sanchez', 'Morty Smith', 'Summer Smith'];
+
+  app.post('/create', async (req, res) => {
+    const item = req.body;
+    await collection.insertOne(item);
+
+    return res.send(item);
+  });
 
   app.get('/itens', async (req, res) => {
     const documents = await collection.find().toArray();
     res.send(documents);
   });
 
-  app.get('/itens/:id', (req, res) => {
+  app.get('/itens/:id', async (req, res) => {
     const id = req.params.id;
-    const item = itens[id - 1];
+    const item = await collection.findOne({
+      _id: new ObjectId(id),
+    });
     res.send(item);
   });
 
-  app.post('/create', (req, res) => {
-    const { name } = req.body;
+  app.put('/update/:id', async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
 
-    itens.push({
-      name,
-    });
-    return res.status(201).send();
+    await collection.updateOne({ _id: new ObjectId(id) }, { $set: body });
+
+    res.send(body);
   });
 
-  app.listen(3000, () => console.log('Listening on port 3000'));
+  app.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id;
+
+    await collection.deleteOne({
+      _id: new ObjectId(id),
+    });
+    res.send('successfully deleted item');
+  });
 }
 
 main();
