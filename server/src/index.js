@@ -31,12 +31,12 @@ async function main() {
     return res.send(item);
   });
 
-  app.get('/itens', async (req, res) => {
+  app.get('/items', async (req, res) => {
     const documents = await collection.find().toArray();
     res.send(documents);
   });
 
-  app.get('/itens/:id', async (req, res) => {
+  app.get('/items/:id', async (req, res) => {
     const id = req.params.id;
     const item = await collection.findOne({
       _id: new ObjectId(id),
