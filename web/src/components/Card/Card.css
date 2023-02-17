@@ -1,0 +1,17 @@
+.card {
+  border: 1px solid yellow;
+  border-radius: 1rem;
+  margin: 2rem;
+  box-shadow: rgb(225, 231, 97) 0px 3px 10px -2px;
+}
+
+.card > h1 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0.1rem;
+}
+
+.card > img {
+  border-radius: 0.5rem;
+  width: 200px;
+}
