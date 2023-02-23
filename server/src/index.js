@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
+const cors = require('cors');
 
 //const { v4: uuidv4 } = require('uuid');
 
@@ -19,6 +20,8 @@ async function main() {
   console.log('Connected database!');
 
   const app = express();
+
+  app.use(cors());
 
   app.use(express.json());
 
