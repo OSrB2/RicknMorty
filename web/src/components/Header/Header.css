@@ -1,0 +1,27 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -2rem;
+}
+
+.Logo img {
+  border-radius: 0.5rem;
+  width: 11rem;
+}
+
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  gap: 3.5rem;
+  padding: 0 0.5rem;
+  margin-right: 3rem;
+}
+
+.NavBar a {
+  color: #e1e761;
+}
+
+.NavBar a:hover {
+  color: #cebf5f;
+}
