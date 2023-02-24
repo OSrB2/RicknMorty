@@ -4,7 +4,7 @@ import { ReadAll } from './components/ReadAll/ReadAll';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
       <ReadAll />
     </div>
