@@ -1,1 +1,1 @@
-# jornadaFullStackOcean
+# RicknMorty
