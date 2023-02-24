@@ -48,7 +48,8 @@ function ReadAll() {
   const [items, setItems] = useState([]);
 
   async function realizarRequisicao() {
-    const url = 'http://localhost:3000/items';
+    // const url = 'http://localhost:3000/items';
+    const url = 'https://ricknmortystudies.onrender.com';
     const response = await fetch(url);
     const data = await response.json();
 
