@@ -25,7 +25,7 @@ async function main() {
 
   app.use(express.json());
 
-  const port = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => console.log(`Listen on port ${PORT}`));
 
   app.post('/create', async (req, res) => {
