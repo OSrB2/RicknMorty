@@ -49,7 +49,7 @@ function ReadAll() {
 
   async function realizarRequisicao() {
     // const url = 'http://localhost:3000/items';
-    const url = 'https://ricknmortystudies.onrender.com';
+    const url = 'https://ricknmortystudies.onrender.com/items';
     const response = await fetch(url);
     const data = await response.json();
 
